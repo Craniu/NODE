@@ -1,6 +1,5 @@
 
 const fs = require('fs')
-const { json } = require('stream/consumers')
 const {autos, mostrar, saludar} = require('./autos.js')
 
 
@@ -15,4 +14,9 @@ console.log(ListaAutos)
 console.log(autos)
 mostrar()
 saludar('Julito')
+
+ListaAutos.forEach((element) => {
+        console.log(`Marca: ${element.marca}, Modelo: ${element.modelo}`)
+    })
+
 
