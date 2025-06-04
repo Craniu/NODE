@@ -1,0 +1,11 @@
+{
+  "name": "unidad-ii",
+  "version": "1.0.0",
+  "description": "Unidad II - Node.js y Express",
+  "author": "Cristoffer Venega DLC.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "license": "ISC"
+}
