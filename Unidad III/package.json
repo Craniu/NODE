@@ -1,0 +1,15 @@
+{
+  "name": "Unidad III",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Cristoffer Venega DLC.",
+  "license": "ISC",
+  "description": "Unidad III",
+  "dependencies": {
+    "pg": "^8.16.0"
+  }
+}
