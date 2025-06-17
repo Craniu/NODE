@@ -24,3 +24,12 @@ export const updateTravelModel = async (id, destino) => {
     const resultado = await pool.query(sqlQuery);
     return resultado.rows;
 }
+
+export const deleteTravelModel = async (id) => {
+    const sqlQuery = {
+        text: 'delete from viajes where id = $1 returning *',
+        values: [parseInt(id)]
+    }
+    const resultado = await pool.query(sqlQuery);
+    return resultado.rows;
+}

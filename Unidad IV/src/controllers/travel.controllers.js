@@ -1,4 +1,4 @@
-import { getTravelsModel, createTravelModel, updateTravelModel} from "../models/travel.models.js";
+import { getTravelsModel, createTravelModel, updateTravelModel, deleteTravelModel} from "../models/travel.models.js";
 
 
 export const getAllTravels = async (req, res) => {   
@@ -37,4 +37,20 @@ export const updateTravel = async (req, res) => {
                res.status(500).json({ error: 'Internal Server Error', mensaje: e.message });
                console.error(e);
           }
+}
+
+export const deleteTravel = async (req, res) => {
+     try {
+          const {id} = req.params;
+          const deletedTravel = await deleteTravelModel(id);
+          if(deletedTravel.length > 0){
+               res.status(200).json({message: 'Viaje eliminado correctamente', viaje: deletedTravel[0]});
+          }
+          else {
+               res.status(404).json({error: 'Viaje no encontrado'});
+          }
+     }catch(e){
+          res.status(500).json({error: 'Internal Server Error', mensaje: e.message });
+          console.error(e);
+     }
 }
