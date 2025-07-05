@@ -79,11 +79,10 @@ export const getFormatTravels = async (req,res) => {
      }
 }
 
-
 export const GetPaginateTravels = async (req,res) =>{
     try{
-          const {order_by, limit} = req.params;
-          const result = await formatTravelModel({order_by, limit, page})
+          const {order_by, limit, page} = req.query;
+          const result = await paginateTravelsModel({order_by, limit, page})
           res.status(200).json({travels: result});
      }catch(e){
           res.status(500).json({error: 'Internal Server Error', mensaje: e.message});

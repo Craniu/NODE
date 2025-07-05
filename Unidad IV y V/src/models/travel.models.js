@@ -58,16 +58,17 @@ export const formatTravelModel = async (order_by = 'id_ASC', limit = 10 ) => {
     return resultado.rows
 }
 
-export const paginateTravelsModel = async ({order_by = 'id_DESC', limit = 10, page= 1}) =>{
+export const paginateTravelsModel = async ({order_by = 'id_ASC', limit = 10, page= 1}) =>{
     const [atribute, direction] = order_by.split('_');
     const offset = (page -1) * limit;
     const formatQuery = format(
-        'select * from viajes order by $s %s limit %s offset %s',
+        'select * from viajes order by %s %s limit %s offset %s',
         atribute,
         direction,
         limit,
         offset
     )
     const resultado = await pool.query(formatQuery);
-    return response.rows;
+    console.log(formatQuery);
+    return resultado.rows;
 }
