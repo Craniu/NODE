@@ -1,4 +1,6 @@
-import { getTravelsModel, createTravelModel, updateTravelModel, deleteTravelModel} from "../models/travel.models.js";
+import { getTravelsModel, createTravelModel, updateTravelModel, 
+     deleteTravelModel, limitTravelModel, formatTravelModel, paginateTravelsModel
+} from "../models/travel.models.js";
 
 
 export const getAllTravels = async (req, res) => {   
@@ -52,5 +54,39 @@ export const deleteTravel = async (req, res) => {
      }catch(e){
           res.status(500).json({error: 'Internal Server Error', mensaje: e.message });
           console.error(e);
+     }
+}
+
+export const getLimitTravels = async (req,res) => {
+     try{
+          const {limit} = req.query;
+          const result = await limitTravelModel(limit);
+          res.status(200).json({travels: result});
+     }catch(e){
+          res.status(500).json({error: 'Internal Server Error', mensaje: e.message });
+          console.error(e);
+     }
+}
+
+export const getFormatTravels = async (req,res) => {
+     try{
+          const {order_by, limit} = req.params;
+          const result = await formatTravelModel(order_by, limit)
+          res.status(200).json({travels: result});
+     }catch(e){
+          res.status(500).json({error: 'Internal Server Error', mensaje: e.message});
+          console.log(e);
+     }
+}
+
+
+export const GetPaginateTravels = async (req,res) =>{
+    try{
+          const {order_by, limit} = req.params;
+          const result = await formatTravelModel({order_by, limit, page})
+          res.status(200).json({travels: result});
+     }catch(e){
+          res.status(500).json({error: 'Internal Server Error', mensaje: e.message});
+          console.log(e);
      }
 }
