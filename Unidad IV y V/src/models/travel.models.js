@@ -35,7 +35,6 @@ export const deleteTravelModel = async (id) => {
     return resultado.rows;
 }
 
-
 export const limitTravelModel = async (limit=5) => {
     const sqlQuery = {
         text: 'select * from viajes order by id desc limit $1',
@@ -70,5 +69,22 @@ export const paginateTravelsModel = async ({order_by = 'id_ASC', limit = 10, pag
     )
     const resultado = await pool.query(formatQuery);
     console.log(formatQuery);
+    return resultado.rows;
+}
+
+export const travelsFilterModel = async ({pres_min, pres_max}) => {
+    const filtros = [];
+    if(pres_min){
+        filtros.push(`presupuesto >= ${pres_min}`)
+    }
+    if(pres_max){
+        filtros.push(`presupuesto <= ${pres_max}`)
+    }
+    // let consulta = "select * from viajes ";
+    // if(filtros.length > 0){
+    //     consulta += ` where ${filtros.join('and')}`;
+    // }
+    let consulta = `select * from viajes ${filtros.length > 0 ? `where ${filtros.join(' and ')}` : ''}`;
+    const resultado = await pool.query(consulta);
     return resultado.rows;
 }

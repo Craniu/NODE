@@ -1,8 +1,12 @@
+import e from "express";
 import { getTravelsModel, createTravelModel, updateTravelModel, 
-     deleteTravelModel, limitTravelModel, formatTravelModel, paginateTravelsModel
+     deleteTravelModel, limitTravelModel, formatTravelModel, paginateTravelsModel,
+     travelsFilterModel
 } from "../models/travel.models.js";
 
-
+export const pageNotfound = async (req,res) => {
+     res.status(404).send('La ruta solicitada no existe.');
+}
 export const getAllTravels = async (req, res) => {   
    try{
         const travels = await getTravelsModel();
@@ -87,5 +91,16 @@ export const GetPaginateTravels = async (req,res) =>{
      }catch(e){
           res.status(500).json({error: 'Internal Server Error', mensaje: e.message});
           console.log(e);
+     }
+}
+
+export const getTravelsFilter = async (req,res) =>{
+     try{
+          const filters = req.query;
+          const result = await travelsFilterModel(filters);
+          res.status(200).json({result});
+     }catch(e){
+          res.status(500).json({error: 'internal Server Error', mensaje: e.message});
+          console.log(e.message);
      }
 }
