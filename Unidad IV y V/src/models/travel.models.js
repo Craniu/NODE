@@ -4,7 +4,7 @@ import format from 'pg-format';
 export const getTravelsModel = async () => {
     const sqlQuery = 'select * from viajes'
     const response = await pool.query(sqlQuery);
-    console.log(response.rows);
+    //console.log(response.rows);
     return response.rows;
 }
 
@@ -88,3 +88,4 @@ export const travelsFilterModel = async ({pres_min, pres_max}) => {
     const resultado = await pool.query(consulta);
     return resultado.rows;
 }
+

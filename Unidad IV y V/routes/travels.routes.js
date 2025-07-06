@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { getAllTravels, createTravel, updateTravel, deleteTravel, getLimitTravels,
-     getFormatTravels, GetPaginateTravels, getTravelsFilter, pageNotfound
+     getFormatTravels, GetPaginateTravels, getTravelsFilter, pageNotfound,
+     getAllTravelsHateoas
     } from "../src/controllers/travel.controllers.js"
 
 export const router = Router();
@@ -13,5 +14,7 @@ router.get('/travels_limit', getLimitTravels);
 router.get('/travels_limit_orderby', getFormatTravels);
 router.get('/travels_paginate', GetPaginateTravels);
 router.get('/travels_filter', getTravelsFilter);
+router.get('/travelsHateoas', getAllTravelsHateoas)
+
 
 router.use(pageNotfound);

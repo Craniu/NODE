@@ -3,6 +3,7 @@ import { getTravelsModel, createTravelModel, updateTravelModel,
      deleteTravelModel, limitTravelModel, formatTravelModel, paginateTravelsModel,
      travelsFilterModel
 } from "../models/travel.models.js";
+import HATEOAS from "../helpers/hateoas.js";
 
 export const pageNotfound = async (req,res) => {
      res.status(404).send('La ruta solicitada no existe.');
@@ -102,5 +103,16 @@ export const getTravelsFilter = async (req,res) =>{
      }catch(e){
           res.status(500).json({error: 'internal Server Error', mensaje: e.message});
           console.log(e.message);
+     }
+}
+
+export const getAllTravelsHateoas = async (req, res) => {
+     try{
+          const data = await getTravelsModel();
+          const viajesHateoas = await HATEOAS ('viajes', data);
+          res.status(200).json({viajes: viajesHateoas});
+     }catch(e){
+          console.log('error', e);
+          res.status(500).json({error: e.message});
      }
 }
